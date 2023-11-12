@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import PokemonList from "./components/PokemonList";
+import PokemonDetail from "./components/PokemonDetail";
+import About from "./components/About";
 
-function App() {
+export default function App() {
+  const router = createHashRouter([
+    {
+      path: "/",
+      element: <PokemonList></PokemonList>,
+    },
+    { path: "/pokemon/:id", element: <PokemonDetail></PokemonDetail> },
+    { path: "/about", element: <About></About> },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router}>
+      <Outlet />
+    </RouterProvider>
   );
 }
-
-export default App;
